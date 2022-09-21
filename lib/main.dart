@@ -29,7 +29,7 @@ class MyList extends StatelessWidget {
   MyList({super.key}) {
     _stream = _reference.snapshots();
   }
-  CollectionReference _reference =
+  final CollectionReference _reference =
       FirebaseFirestore.instance.collection('users');
 
   late Stream<QuerySnapshot> _stream;
