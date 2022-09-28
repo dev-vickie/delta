@@ -1,3 +1,6 @@
+// ignore_for_file: prefer_const_constructors
+
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -10,6 +13,16 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   final user = FirebaseAuth.instance.currentUser!;
+
+  List<String> docIDs = [];
+
+  Future getDocId() async {
+    await FirebaseFirestore.instance.collection('users').get().then(
+          (snapshot) => snapshot.docs.forEach((document) {
+            docIDs.add(document.reference.id);
+          }),
+        );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -32,6 +45,21 @@ class _HomePageState extends State<HomePage> {
               },
               color: Colors.blue,
               child: const Text('Sign Out'),
+            ),
+            Expanded(
+              child: FutureBuilder(
+                future: getDocId(),
+                builder: (context, snapshot) {
+                  return ListView.builder(
+                    itemCount: docIDs.length,
+                    itemBuilder: (context, index) {
+                      return ListTile(
+                        title: Text(docIDs[index]),
+                      );
+                    },
+                  );
+                },
+              ),
             )
           ],
         ),
