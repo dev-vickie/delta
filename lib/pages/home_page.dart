@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:delta/read%20data/get_user_data.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -54,7 +55,7 @@ class _HomePageState extends State<HomePage> {
                     itemCount: docIDs.length,
                     itemBuilder: (context, index) {
                       return ListTile(
-                        title: Text(docIDs[index]),
+                        title: GetUSerData(documentId: docIDs[index]),
                       );
                     },
                   );
