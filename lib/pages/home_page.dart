@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors
+// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:delta/read%20data/get_user_data.dart';
@@ -28,7 +28,16 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        title: Text(user.email!),
+        actions: [
+          IconButton(
+              onPressed: () {
+                FirebaseAuth.instance.signOut();
+              },
+              icon: Icon(Icons.logout))
+        ],
+      ),
       drawer: const Drawer(
         backgroundColor: Colors.blueAccent,
       ),
@@ -36,16 +45,8 @@ class _HomePageState extends State<HomePage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text("Signed in as :${user.email!}"),
             const SizedBox(
               height: 10,
-            ),
-            MaterialButton(
-              onPressed: () {
-                FirebaseAuth.instance.signOut();
-              },
-              color: Colors.blue,
-              child: const Text('Sign Out'),
             ),
             Expanded(
               child: FutureBuilder(
@@ -54,8 +55,24 @@ class _HomePageState extends State<HomePage> {
                   return ListView.builder(
                     itemCount: docIDs.length,
                     itemBuilder: (context, index) {
-                      return ListTile(
-                        title: GetUSerData(documentId: docIDs[index]),
+                      return Padding(
+                        padding: const EdgeInsets.all(2.0),
+                        child: Container(
+                          height: 75,
+                          width: MediaQuery.of(context).size.width,
+                          decoration: BoxDecoration(
+                            color: Colors.blue,
+                            borderRadius: BorderRadius.circular(6),
+                          ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              GetUSerName(documentId: docIDs[index]),
+                              SizedBox(width: 20),
+                              GetUSerEmail(documentId: docIDs[index]),
+                            ],
+                          ),
+                        ),
                       );
                     },
                   );
