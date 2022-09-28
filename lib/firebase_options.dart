@@ -67,7 +67,8 @@ class DefaultFirebaseOptions {
     messagingSenderId: '794052151379',
     projectId: 'delta-project-d65f9',
     storageBucket: 'delta-project-d65f9.appspot.com',
-    iosClientId: '794052151379-4e56lftjfbjbf8qritia8be0lotdo6gs.apps.googleusercontent.com',
+    iosClientId:
+        '794052151379-4e56lftjfbjbf8qritia8be0lotdo6gs.apps.googleusercontent.com',
     iosBundleId: 'com.example.delta',
   );
 
@@ -77,7 +78,8 @@ class DefaultFirebaseOptions {
     messagingSenderId: '794052151379',
     projectId: 'delta-project-d65f9',
     storageBucket: 'delta-project-d65f9.appspot.com',
-    iosClientId: '794052151379-4e56lftjfbjbf8qritia8be0lotdo6gs.apps.googleusercontent.com',
+    iosClientId:
+        '794052151379-4e56lftjfbjbf8qritia8be0lotdo6gs.apps.googleusercontent.com',
     iosBundleId: 'com.example.delta',
   );
 }

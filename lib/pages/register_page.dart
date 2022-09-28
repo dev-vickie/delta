@@ -13,7 +13,7 @@ class RegisterPage extends StatefulWidget {
 }
 
 class _RegisterPageState extends State<RegisterPage> {
-  //Controllers
+  //Create Controllers
   final _passwordController = TextEditingController();
   final _emailController = TextEditingController();
   final _confirmpasswordController = TextEditingController();
@@ -49,14 +49,17 @@ class _RegisterPageState extends State<RegisterPage> {
     }
   }
 
+  //Outside the sign up method
   Future addUserData(
       String firstName, String lastName, String email, int age) async {
-    await FirebaseFirestore.instance.collection('users').add({
-      "First name": firstName,
-      "Last Name": lastName,
-      "Email": email,
-      "Age": age,
-    });
+    await FirebaseFirestore.instance.collection('users').add(
+      {
+        "First name": firstName,
+        "Last Name": lastName,
+        "Email": email,
+        "Age": age,
+      },
+    );
   }
 
   bool passwordConfirm() {
