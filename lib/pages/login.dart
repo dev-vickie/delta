@@ -69,16 +69,20 @@ class _LoginPageState extends State<LoginPage> {
                   child: TextField(
                     controller: _emailController,
                     decoration: InputDecoration(
-                        enabledBorder: OutlineInputBorder(
-                          borderSide: BorderSide(color: mainDarkColor),
-                          borderRadius: BorderRadius.circular(30),
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                          borderSide: const BorderSide(color: Colors.blue),
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                        hintText: 'Email',
-                        hintStyle: TextStyle(color: Colors.grey[400])),
+                      enabledBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: mainDarkColor),
+                        borderRadius: BorderRadius.circular(30),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: const BorderSide(color: Colors.blue),
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      hintText: 'Email',
+                      hintStyle: GoogleFonts.notoSans(
+                        fontSize: 20,
+                        color: Colors.grey[300],
+                      ),
+                    ),
                   ),
                 ),
                 const SizedBox(
@@ -101,7 +105,10 @@ class _LoginPageState extends State<LoginPage> {
                         borderRadius: BorderRadius.circular(12),
                       ),
                       hintText: 'Password',
-                      hintStyle: TextStyle(color: Colors.grey[400]),
+                      hintStyle: GoogleFonts.notoSans(
+                        fontSize: 20,
+                        color: Colors.grey[300],
+                      ),
                     ),
                   ),
                 ),
@@ -129,7 +136,7 @@ class _LoginPageState extends State<LoginPage> {
                         },
                         child: Text(
                           'Forgot password?',
-                          style: TextStyle(
+                          style: GoogleFonts.notoSans(
                             color: Colors.blue,
                             fontWeight: FontWeight.bold,
                           ),
@@ -158,9 +165,9 @@ class _LoginPageState extends State<LoginPage> {
                       child: Center(
                         child: Text(
                           'Login',
-                          style: GoogleFonts.bebasNeue(
+                          style: GoogleFonts.notoSans(
                             color: Colors.white,
-                            fontSize: 25,
+                            fontSize: 34,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
@@ -179,13 +186,16 @@ class _LoginPageState extends State<LoginPage> {
                   children: [
                     Text(
                       'Not a member?',
-                      style: TextStyle(color: mainDarkColor),
+                      style: GoogleFonts.notoSans(
+                        color: mainDarkColor,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                     GestureDetector(
                       onTap: widget.showRegisterPage,
                       child: Text(
                         ' Register now',
-                        style: TextStyle(
+                        style: GoogleFonts.notoSans(
                           color: Colors.blue,
                           fontWeight: FontWeight.bold,
                         ),
