@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
+import 'package:delta/main.dart';
 import 'package:delta/pages/forgot_pw_page.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -25,16 +26,27 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   Future login() async {
-    await FirebaseAuth.instance.signInWithEmailAndPassword(
-      email: _emailController.text.trim(),
-      password: _passwordController.text.trim(),
-    );
+    try {
+      await FirebaseAuth.instance.signInWithEmailAndPassword(
+        email: _emailController.text.trim(),
+        password: _passwordController.text.trim(),
+      );
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'user-not-found') {
+        return ('No user found for this email');
+      } else if (e.code == 'wrong-password') {
+        return SnackBar(
+          content: Text('Wrong password'),
+        );
+      }
+    }
+    return CircularProgressIndicator();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.blue[200],
+      backgroundColor: mainLightColor,
       body: SafeArea(
         child: Center(
           child: SingleChildScrollView(
