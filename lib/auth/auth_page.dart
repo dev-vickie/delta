@@ -1,5 +1,5 @@
-import 'package:delta/pages/login.dart';
-import 'package:delta/pages/register_page.dart';
+import 'package:delta/auth/login.dart';
+import 'package:delta/auth/register_page.dart';
 import 'package:flutter/material.dart';
 
 class AuthPage extends StatefulWidget {

@@ -1,9 +1,8 @@
 import 'package:delta/auth/auth_page.dart';
+import 'package:delta/pages/home_page.dart';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-
-import '../pages/home_page.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({super.key});
@@ -20,7 +19,7 @@ class _MainPageState extends State<MainPage> {
         stream: FirebaseAuth.instance.authStateChanges(),
         builder: (context, snapshot) {
           if (snapshot.hasData) {
-            return const HomePage();
+            return const Homepage();
           } else {
             return const AuthPage();
           }

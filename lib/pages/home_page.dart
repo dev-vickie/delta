@@ -1,86 +1,60 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:delta/read%20data/get_user_data.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:delta/main.dart';
+import 'package:delta/pages/first_page.dart';
+import 'package:delta/pages/second_page.dart';
+import 'package:delta/pages/third_page.dart';
 import 'package:flutter/material.dart';
 
-class HomePage extends StatefulWidget {
-  const HomePage({super.key});
+class Homepage extends StatefulWidget {
+  const Homepage({super.key});
 
   @override
-  State<HomePage> createState() => _HomePageState();
+  State<Homepage> createState() => _HomepageState();
 }
 
-class _HomePageState extends State<HomePage> {
-  final user = FirebaseAuth.instance.currentUser!;
-
-  List<String> docIDs = [];
-
-  Future getDocId() async {
-    await FirebaseFirestore.instance.collection('users').get().then(
-          (snapshot) => snapshot.docs.forEach((document) {
-            docIDs.add(document.reference.id);
-          }),
-        );
+class _HomepageState extends State<Homepage> {
+  int currentPage = 0;
+  void _pageNavigator(index) {
+    setState(() {
+      currentPage = index;
+    });
   }
 
+  final List _pages = [
+    FirstPage(),
+    SecondPage(),
+    ThirdPage(),
+  ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: mainDarkColor,
+      drawer: Drawer(),
       appBar: AppBar(
-        title: Text(user.email!),
-        actions: [
-          IconButton(
-              onPressed: () {
-                FirebaseAuth.instance.signOut();
-              },
-              icon: Icon(Icons.logout))
-        ],
+        backgroundColor: mainDarkColor,
       ),
-      drawer: const Drawer(
-        backgroundColor: Colors.blueAccent,
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            const SizedBox(
-              height: 10,
-            ),
-            Expanded(
-              child: FutureBuilder(
-                future: getDocId(),
-                builder: (context, snapshot) {
-                  return ListView.builder(
-                    itemCount: docIDs.length,
-                    itemBuilder: (context, index) {
-                      return Padding(
-                        padding: const EdgeInsets.all(2.0),
-                        child: Container(
-                          height: 75,
-                          width: MediaQuery.of(context).size.width,
-                          decoration: BoxDecoration(
-                            color: Colors.blue,
-                            borderRadius: BorderRadius.circular(6),
-                          ),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              GetUSerName(documentId: docIDs[index]),
-                              SizedBox(width: 20),
-                              GetUSerEmail(documentId: docIDs[index]),
-                            ],
-                          ),
-                        ),
-                      );
-                    },
-                  );
-                },
-              ),
-            )
-          ],
+      body: _pages[currentPage],
+      bottomNavigationBar: BottomNavigationBar(
+        selectedIconTheme: IconThemeData(color: mainLightColor),
+        elevation: 0,
+        backgroundColor: mainDarkColor,
+        unselectedIconTheme: IconThemeData(
+          color: Colors.white,
         ),
+        unselectedLabelStyle: TextStyle(color: mainLightColor),
+        showUnselectedLabels: true,
+        showSelectedLabels: true,
+        selectedLabelStyle: TextStyle(color: mainLightColor),
+        onTap: _pageNavigator,
+        currentIndex: currentPage,
+        type: BottomNavigationBarType.fixed,
+        items: [
+          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
+          BottomNavigationBarItem(icon: Icon(Icons.add), label: 'Categories'),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.settings_applications), label: 'Settings'),
+        ],
       ),
     );
   }
