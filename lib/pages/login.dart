@@ -4,6 +4,7 @@ import 'package:delta/main.dart';
 import 'package:delta/pages/forgot_pw_page.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class LoginPage extends StatefulWidget {
   final VoidCallback showRegisterPage;
@@ -26,21 +27,20 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   Future login() async {
-    try {
-      await FirebaseAuth.instance.signInWithEmailAndPassword(
-        email: _emailController.text.trim(),
-        password: _passwordController.text.trim(),
-      );
-    } on FirebaseAuthException catch (e) {
-      if (e.code == 'user-not-found') {
-        return ('No user found for this email');
-      } else if (e.code == 'wrong-password') {
-        return SnackBar(
-          content: Text('Wrong password'),
+    //Loading Animation Here?
+    showDialog(
+      context: context,
+      builder: (context) {
+        return Center(
+          child: CircularProgressIndicator(),
         );
-      }
-    }
-    return CircularProgressIndicator();
+      },
+    );
+    await FirebaseAuth.instance.signInWithEmailAndPassword(
+      email: _emailController.text.trim(),
+      password: _passwordController.text.trim(),
+    );
+    Navigator.of(context).pop();
   }
 
   @override
@@ -53,52 +53,64 @@ class _LoginPageState extends State<LoginPage> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text('Login Page'),
-                const SizedBox(
-                  height: 70,
+                Icon(
+                  Icons.book,
+                  size: 70,
+                  color: mainDarkColor,
                 ),
+                const SizedBox(
+                  height: 60,
+                ),
+
                 //Email Input
+
                 Padding(
-                  padding: const EdgeInsets.all(8.0),
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
                   child: TextField(
                     controller: _emailController,
                     decoration: InputDecoration(
-                      enabledBorder: OutlineInputBorder(
-                        borderSide: const BorderSide(color: Colors.white),
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderSide: const BorderSide(color: Colors.blue),
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                      hintText: 'Email',
-                    ),
+                        enabledBorder: OutlineInputBorder(
+                          borderSide: BorderSide(color: mainDarkColor),
+                          borderRadius: BorderRadius.circular(30),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderSide: const BorderSide(color: Colors.blue),
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                        hintText: 'Email',
+                        hintStyle: TextStyle(color: Colors.grey[400])),
                   ),
                 ),
                 const SizedBox(
-                  height: 2,
+                  height: 10,
                 ),
+
                 //Password input
+
                 Padding(
-                  padding: const EdgeInsets.all(8.0),
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
                   child: TextField(
                     controller: _passwordController,
                     decoration: InputDecoration(
                       enabledBorder: OutlineInputBorder(
-                        borderSide: const BorderSide(color: Colors.white),
-                        borderRadius: BorderRadius.circular(12),
+                        borderSide: BorderSide(color: mainDarkColor),
+                        borderRadius: BorderRadius.circular(30),
                       ),
                       focusedBorder: OutlineInputBorder(
                         borderSide: const BorderSide(color: Colors.blue),
                         borderRadius: BorderRadius.circular(12),
                       ),
                       hintText: 'Password',
+                      hintStyle: TextStyle(color: Colors.grey[400]),
                     ),
                   ),
                 ),
                 const SizedBox(
-                  height: 2,
+                  height: 5,
                 ),
+
+                //Forgot Password Text
+
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 8.0),
                   child: Row(
@@ -127,7 +139,9 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                 ),
                 SizedBox(height: 5),
+
                 //Login Button
+
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: GestureDetector(
@@ -138,13 +152,13 @@ class _LoginPageState extends State<LoginPage> {
                       height: 60,
                       width: MediaQuery.of(context).size.width,
                       decoration: BoxDecoration(
-                        color: Colors.blue,
+                        color: mainDarkColor,
                         borderRadius: BorderRadius.circular(13),
                       ),
                       child: Center(
                         child: Text(
                           'Login',
-                          style: TextStyle(
+                          style: GoogleFonts.bebasNeue(
                             color: Colors.white,
                             fontSize: 25,
                             fontWeight: FontWeight.bold,
@@ -157,10 +171,16 @@ class _LoginPageState extends State<LoginPage> {
                 SizedBox(
                   height: 10,
                 ),
+
+                //Not A Member,Register Text
+
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text('Not a member?'),
+                    Text(
+                      'Not a member?',
+                      style: TextStyle(color: mainDarkColor),
+                    ),
                     GestureDetector(
                       onTap: widget.showRegisterPage,
                       child: Text(

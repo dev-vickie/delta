@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 class GetUSerName extends StatelessWidget {
   final String documentId;
 
-  GetUSerName({required this.documentId});
+  GetUSerName({super.key, required this.documentId});
   @override
   Widget build(BuildContext context) {
     CollectionReference users = FirebaseFirestore.instance.collection('users');
