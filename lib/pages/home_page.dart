@@ -1,5 +1,5 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
-
+import 'package:google_fonts/google_fonts.dart';
 import 'package:delta/main.dart';
 import 'package:delta/pages/first_page.dart';
 import 'package:delta/pages/second_page.dart';
@@ -36,16 +36,19 @@ class _HomepageState extends State<Homepage> {
       ),
       body: _pages[currentPage],
       bottomNavigationBar: BottomNavigationBar(
-        selectedIconTheme: IconThemeData(color: mainLightColor),
+        selectedItemColor: mainDarkColor,
+        selectedIconTheme: IconThemeData(color: mainDarkColor),
         elevation: 0,
-        backgroundColor: mainDarkColor,
+        backgroundColor: mainLightColor,
         unselectedIconTheme: IconThemeData(
           color: Colors.white,
         ),
-        unselectedLabelStyle: TextStyle(color: mainLightColor),
+        unselectedLabelStyle: GoogleFonts.notoSans(
+            color: mainLightColor, fontSize: 17, fontWeight: FontWeight.bold),
         showUnselectedLabels: true,
         showSelectedLabels: true,
-        selectedLabelStyle: TextStyle(color: mainLightColor),
+        selectedLabelStyle:
+            GoogleFonts.notoSans(fontSize: 17, fontWeight: FontWeight.bold),
         onTap: _pageNavigator,
         currentIndex: currentPage,
         type: BottomNavigationBarType.fixed,
