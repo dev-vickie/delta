@@ -3,7 +3,7 @@
 import 'package:flutter/material.dart';
 
 class SecondPage extends StatefulWidget {
-  SecondPage({Key? key}) : super(key: key);
+  const SecondPage({Key? key}) : super(key: key);
 
   @override
   State<SecondPage> createState() => _SecondPageState();
@@ -11,12 +11,13 @@ class SecondPage extends StatefulWidget {
 
 class _SecondPageState extends State<SecondPage> {
   final _textController = TextEditingController();
-
+  final mainLightColor = Color.fromARGB(255, 78, 98, 134);
+  final mainDarkColor = Color.fromARGB(255, 0, 7, 20);
   String category = '';
 
   @override
   Widget build(BuildContext context) {
-    return Center(
+    return SingleChildScrollView(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.center,
@@ -30,7 +31,7 @@ class _SecondPageState extends State<SecondPage> {
               controller: _textController,
               decoration: InputDecoration(
                 hintText: "Input Category name ",
-                hintStyle: TextStyle(color: Color.fromARGB(255, 13, 9, 238)),
+                hintStyle: TextStyle(color: mainDarkColor),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(30),
                 ),
@@ -43,7 +44,7 @@ class _SecondPageState extends State<SecondPage> {
             child: TextField(
               decoration: InputDecoration(
                 hintText: "Description ",
-                hintStyle: TextStyle(color: Color.fromARGB(255, 13, 9, 238)),
+                hintStyle: TextStyle(color: mainDarkColor),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(30),
                 ),
@@ -56,7 +57,7 @@ class _SecondPageState extends State<SecondPage> {
             child: TextField(
               decoration: InputDecoration(
                 hintText: "Paste a file's link ",
-                hintStyle: TextStyle(color: Color.fromARGB(255, 13, 9, 238)),
+                hintStyle: TextStyle(color: mainDarkColor),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(30),
                 ),

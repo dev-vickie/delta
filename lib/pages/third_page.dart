@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
+import 'package:delta/main.dart';
 import 'package:flutter/material.dart';
 
 class ThirdPage extends StatefulWidget {
@@ -13,7 +14,7 @@ class _ThirdPageState extends State<ThirdPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      //backgroundColor: Color.fromARGB(255, 0, 7, 20),
+      backgroundColor: mainLightColor,
       body: Column(
         children: [
           ListTile(

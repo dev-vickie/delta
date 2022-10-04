@@ -29,16 +29,21 @@ class _HomepageState extends State<Homepage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: mainDarkColor,
+      backgroundColor: mainLightColor,
       drawer: Drawer(),
       appBar: AppBar(
+        centerTitle: true,
+        title: Text(
+          'DeltaNotes',
+          style:
+              GoogleFonts.notoSans(fontSize: 27, fontWeight: FontWeight.bold),
+        ),
         backgroundColor: mainDarkColor,
       ),
       body: _pages[currentPage],
       bottomNavigationBar: BottomNavigationBar(
         selectedItemColor: mainDarkColor,
         selectedIconTheme: IconThemeData(color: mainDarkColor),
-        elevation: 0,
         backgroundColor: mainLightColor,
         unselectedIconTheme: IconThemeData(
           color: Colors.white,
