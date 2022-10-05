@@ -30,7 +30,28 @@ class _HomepageState extends State<Homepage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: mainLightColor,
-      drawer: Drawer(),
+      drawer: Drawer(
+        backgroundColor: mainLightColor,
+        child: Column(
+          children: [
+            DrawerHeader(
+              child: Center(
+                child: Icon(
+                  Icons.person,
+                  size: 50,
+                  color: Colors.white,
+                ),
+              ),
+            ),
+            ListTile(
+              title: Text(
+                'Share',
+                style: TextStyle(color: Colors.black, fontSize: 25),
+              ),
+            )
+          ],
+        ),
+      ),
       appBar: AppBar(
         centerTitle: true,
         title: Text(

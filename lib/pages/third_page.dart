@@ -10,6 +10,8 @@ class ThirdPage extends StatefulWidget {
   State<ThirdPage> createState() => _ThirdPageState();
 }
 
+final TextStyle titleStyle = TextStyle();
+
 class _ThirdPageState extends State<ThirdPage> {
   @override
   Widget build(BuildContext context) {
