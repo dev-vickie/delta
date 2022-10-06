@@ -26,64 +26,96 @@ class _HomepageState extends State<Homepage> {
     SecondPage(),
     ThirdPage(),
   ];
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: mainLightColor,
-      drawer: Drawer(
+    Future<bool> showExitPopup() async {
+      return await showDialog(
+            //show confirm dialogue
+            //the return value will be from "Yes" or "No" options
+            context: context,
+            builder: (context) => AlertDialog(
+              title: Text('Exit App'),
+              content: Text('Do you want to exit an App?'),
+              actions: [
+                ElevatedButton(
+                  onPressed: () => Navigator.of(context).pop(false),
+                  //return false when click on "NO"
+                  child: Text('No'),
+                ),
+                ElevatedButton(
+                  onPressed: () => Navigator.of(context).pop(true),
+                  //return true when click on "Yes"
+                  child: Text('Yes'),
+                ),
+              ],
+            ),
+          ) ??
+          false; //if showDialouge had returned null, then return false
+    }
+
+    return WillPopScope(
+      onWillPop: () async {
+        bool? result = await showExitPopup();
+        return result;
+      },
+      child: Scaffold(
         backgroundColor: mainLightColor,
-        child: Column(
-          children: [
-            DrawerHeader(
-              child: Center(
-                child: Icon(
-                  Icons.person,
-                  size: 50,
-                  color: Colors.white,
+        drawer: Drawer(
+          backgroundColor: mainLightColor,
+          child: Column(
+            children: [
+              DrawerHeader(
+                child: Center(
+                  child: Icon(
+                    Icons.person,
+                    size: 50,
+                    color: Colors.white,
+                  ),
                 ),
               ),
-            ),
-            ListTile(
-              title: Text(
-                'Share',
-                style: TextStyle(color: Colors.black, fontSize: 25),
-              ),
-            )
+              ListTile(
+                title: Text(
+                  'Share',
+                  style: TextStyle(color: Colors.black, fontSize: 25),
+                ),
+              )
+            ],
+          ),
+        ),
+        appBar: AppBar(
+          centerTitle: true,
+          title: Text(
+            'DeltaNotes',
+            style:
+                GoogleFonts.notoSans(fontSize: 27, fontWeight: FontWeight.bold),
+          ),
+          backgroundColor: mainDarkColor,
+        ),
+        body: _pages[currentPage],
+        bottomNavigationBar: BottomNavigationBar(
+          selectedItemColor: mainDarkColor,
+          selectedIconTheme: IconThemeData(color: mainDarkColor),
+          backgroundColor: mainLightColor,
+          unselectedIconTheme: IconThemeData(
+            color: Colors.white,
+          ),
+          unselectedLabelStyle: GoogleFonts.notoSans(
+              color: mainLightColor, fontSize: 17, fontWeight: FontWeight.bold),
+          showUnselectedLabels: true,
+          showSelectedLabels: true,
+          selectedLabelStyle:
+              GoogleFonts.notoSans(fontSize: 17, fontWeight: FontWeight.bold),
+          onTap: _pageNavigator,
+          currentIndex: currentPage,
+          type: BottomNavigationBarType.fixed,
+          items: [
+            BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
+            BottomNavigationBarItem(icon: Icon(Icons.add), label: 'Categories'),
+            BottomNavigationBarItem(
+                icon: Icon(Icons.settings_applications), label: 'Settings'),
           ],
         ),
-      ),
-      appBar: AppBar(
-        centerTitle: true,
-        title: Text(
-          'DeltaNotes',
-          style:
-              GoogleFonts.notoSans(fontSize: 27, fontWeight: FontWeight.bold),
-        ),
-        backgroundColor: mainDarkColor,
-      ),
-      body: _pages[currentPage],
-      bottomNavigationBar: BottomNavigationBar(
-        selectedItemColor: mainDarkColor,
-        selectedIconTheme: IconThemeData(color: mainDarkColor),
-        backgroundColor: mainLightColor,
-        unselectedIconTheme: IconThemeData(
-          color: Colors.white,
-        ),
-        unselectedLabelStyle: GoogleFonts.notoSans(
-            color: mainLightColor, fontSize: 17, fontWeight: FontWeight.bold),
-        showUnselectedLabels: true,
-        showSelectedLabels: true,
-        selectedLabelStyle:
-            GoogleFonts.notoSans(fontSize: 17, fontWeight: FontWeight.bold),
-        onTap: _pageNavigator,
-        currentIndex: currentPage,
-        type: BottomNavigationBarType.fixed,
-        items: [
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
-          BottomNavigationBarItem(icon: Icon(Icons.add), label: 'Categories'),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.settings_applications), label: 'Settings'),
-        ],
       ),
     );
   }
