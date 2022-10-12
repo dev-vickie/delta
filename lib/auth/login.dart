@@ -40,7 +40,7 @@ class _LoginPageState extends State<LoginPage> {
       email: _emailController.text.trim(),
       password: _passwordController.text.trim(),
     );
-    
+
     Navigator.of(context).pop();
   }
 
@@ -76,7 +76,7 @@ class _LoginPageState extends State<LoginPage> {
                       ),
                       focusedBorder: OutlineInputBorder(
                         borderSide: const BorderSide(color: Colors.blue),
-                        borderRadius: BorderRadius.circular(12),
+                        borderRadius: BorderRadius.circular(30),
                       ),
                       hintText: 'Email',
                       hintStyle: GoogleFonts.notoSans(
@@ -95,6 +95,7 @@ class _LoginPageState extends State<LoginPage> {
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 20),
                   child: TextField(
+                    obscureText: true,
                     controller: _passwordController,
                     decoration: InputDecoration(
                       enabledBorder: OutlineInputBorder(
@@ -103,7 +104,7 @@ class _LoginPageState extends State<LoginPage> {
                       ),
                       focusedBorder: OutlineInputBorder(
                         borderSide: const BorderSide(color: Colors.blue),
-                        borderRadius: BorderRadius.circular(12),
+                        borderRadius: BorderRadius.circular(30),
                       ),
                       hintText: 'Password',
                       hintStyle: GoogleFonts.notoSans(
