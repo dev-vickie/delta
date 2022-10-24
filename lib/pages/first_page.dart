@@ -1,7 +1,5 @@
-// ignore_for_file: prefer_const_constructors
-
 import 'package:delta/main.dart';
-import 'package:delta/pages/second_page.dart';
+
 import 'package:flutter/material.dart';
 
 class FirstPage extends StatefulWidget {
@@ -14,11 +12,7 @@ class FirstPage extends StatefulWidget {
 class _FirstPageState extends State<FirstPage> {
   @override
   Widget build(BuildContext context) {
-    //IDK why this list works inside the build{} method!
-    final List categories = [
-      'Category 1',
-      'Category 2',
-    ];
+    final List categories = [];
     return Scaffold(
       backgroundColor: mainLightColor,
       body: ListView.builder(
@@ -28,7 +22,7 @@ class _FirstPageState extends State<FirstPage> {
             height: 200,
             child: Container(
               height: 120,
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 color: Colors.white,
                 //color: Color.fromARGB(255, 0, 7, 20),
               ),
@@ -44,7 +38,7 @@ class _FirstPageState extends State<FirstPage> {
                           padding: const EdgeInsets.all(7.0),
                           child: Text(
                             categories[index],
-                            style: TextStyle(
+                            style: const TextStyle(
                               fontSize: 15,
                               fontWeight: FontWeight.bold,
                               //color: Colors.white,
@@ -78,7 +72,7 @@ class _FirstPageState extends State<FirstPage> {
                             child: Container(
                               width: 230,
                               decoration: BoxDecoration(
-                                color: Color.fromARGB(255, 78, 98, 134),
+                                color: const Color.fromARGB(255, 78, 98, 134),
                                 borderRadius: BorderRadius.circular(6),
                               ),
                             ),
@@ -92,15 +86,6 @@ class _FirstPageState extends State<FirstPage> {
             ),
           );
         },
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.of(context).push(MaterialPageRoute(
-            builder: (context) => SecondPage(),
-          ));
-        },
-        backgroundColor: Colors.blueAccent,
-        child: Icon(Icons.add),
       ),
     );
   }

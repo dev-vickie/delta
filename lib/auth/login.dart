@@ -15,7 +15,6 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  //Controllers
   final _passwordController = TextEditingController();
   final _emailController = TextEditingController();
 
@@ -24,24 +23,6 @@ class _LoginPageState extends State<LoginPage> {
     _emailController.dispose();
     _passwordController.dispose();
     super.dispose();
-  }
-
-  Future login() async {
-    //Loading Animation Here?
-    showDialog(
-      context: context,
-      builder: (context) {
-        return Center(
-          child: CircularProgressIndicator(),
-        );
-      },
-    );
-    await FirebaseAuth.instance.signInWithEmailAndPassword(
-      email: _emailController.text.trim(),
-      password: _passwordController.text.trim(),
-    );
-
-    Navigator.of(context).pop();
   }
 
   @override
@@ -78,7 +59,7 @@ class _LoginPageState extends State<LoginPage> {
                         borderSide: const BorderSide(color: Colors.blue),
                         borderRadius: BorderRadius.circular(30),
                       ),
-                      hintText: 'Email',
+                      hintText: 'Enter your email',
                       hintStyle: GoogleFonts.notoSans(
                         fontSize: 20,
                         color: Colors.grey[300],
@@ -211,5 +192,23 @@ class _LoginPageState extends State<LoginPage> {
         ),
       ),
     );
+  }
+
+  //---------Service
+  Future login() async {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return Center(
+          child: CircularProgressIndicator(),
+        );
+      },
+    );
+    await FirebaseAuth.instance.signInWithEmailAndPassword(
+      email: _emailController.text.trim(),
+      password: _passwordController.text.trim(),
+    );
+
+    Navigator.of(context).pop();
   }
 }

@@ -127,20 +127,20 @@ class _SecondPageState extends State<SecondPage> {
   }
 }
 
-class CreateCategory extends StatelessWidget {
-  const CreateCategory({Key? key}) : super(key: key);
+// class CreateCategory extends StatelessWidget {
+//   const CreateCategory({Key? key}) : super(key: key);
 
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Center(
-        child: Container(
-          height: 200,
-          width: MediaQuery.of(context).size.width,
-          color: Colors.blue,
-        ),
-      ),
-    );
-  }
-}
+//   @override
+//   Widget build(BuildContext context) {
+//     return Padding(
+//       padding: const EdgeInsets.all(8.0),
+//       child: Center(
+//         child: Container(
+//           height: 200,
+//           width: MediaQuery.of(context).size.width,
+//           color: Colors.blue,
+//         ),
+//       ),
+//     );
+//   }
+// }
